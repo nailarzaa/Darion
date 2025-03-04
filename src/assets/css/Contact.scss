@@ -1,0 +1,132 @@
+@mixin centerDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-photo {
+    position: relative;
+
+    .contact-text {
+        position: absolute;
+        top: 140px;
+        left: 70px;
+
+        p {
+            span {
+                color: grey;
+            }
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 50vh;
+    }
+}
+
+@mixin   button {
+    width: 180px;
+    padding: 10px 25px;
+    border: none;
+    background-color: black;
+    color: #fff;
+    border-radius: 22px;
+}
+.text-image {
+    margin: 100px 0px;
+
+    .text {
+        // height: 50vh;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        justify-content: center;
+        margin-top: 30px;
+
+        h1 {
+            font-family: "Cormorant Garamond", serif;
+
+        }
+
+        button {
+       @include button();
+        }
+
+        span {
+            color: #D8A595;
+            font-weight: 600;
+        }
+    }
+
+    .image {
+        position: relative;
+
+        .mb-2 {
+            height: 450px;
+        }
+
+        .mx-0 {
+            position: absolute;
+            top: 73px;
+
+        }
+
+        img {
+            margin-right: 15px;
+        }
+    }
+}
+
+.map {
+    width: 100%;
+    height: 70vh;
+    margin-bottom: 50px;
+}
+
+.gradient-part {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(227, 224, 212, 1) 50%, rgba(255, 255, 255, 1) 100%);
+}  
+.general-contact-info{
+    width: 100%;
+    height: 70vh;
+    margin-top:40px ;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://darion.wpbingosite.com/wp-content/uploads/2024/03/sign-in.jpg');
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20px;
+    .contact-infos{
+        margin: 40px 0;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .contact-details{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input, .message-input{
+                width: 430px;
+                height: 40px;
+                margin: 5px 0px;
+                padding-left: 10px;
+                border-radius: 20px;
+                border: 1px solid #e3e3e3;
+                outline: none;
+                
+            
+            }
+            button{
+                @include button();
+            }
+        }
+        h1,h3,p, h4{
+            text-align: center;
+            color: #e3e3e3;
+        }
+    }
+}

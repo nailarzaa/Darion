@@ -1,0 +1,11 @@
+:root {
+    --navbar-bg-color: white;
+    --navbar-text-color: #2E3034;
+    --btn-bg-color: #f8f9fa;
+  }
+  
+  [data-theme="dark"] {
+    --navbar-bg-color: #2E3034;
+    --navbar-text-color: white;
+    --btn-bg-color: #343a40;
+  }

@@ -1,0 +1,153 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-photo {
+    position: relative;
+
+    .about-text {
+        position: absolute;
+        top: 140px;
+        left: 70px;
+
+        p {
+            span {
+                color: grey;
+            }
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 50vh;
+    }
+}
+
+.text-photo {
+    .left-photo {
+        img {
+            width: 100%;
+            border-radius: 20px;
+        }
+    }
+
+    .textt {
+        @include center()
+    }
+
+    .right-text {
+        width: 460px;
+
+        p {
+            font-size: 17.5px;
+            color: #8A8A8A;
+            font-weight: 300;
+
+        }
+
+    }
+}
+
+.our-team {
+    h1 {
+        text-align: center;
+        margin: 60px 0px;
+    }
+
+    .team-member {
+        width: 100%;
+        height: 50vh;
+        border: 1px solid #e2e2e2;
+        border-radius: 17px;
+        position: relative;
+
+        .title {
+            position: absolute;
+            top: 310px;
+            left: 60px;
+            text-align: center;
+        }
+
+        .person-img {
+            width: 220px;
+            height: 220px;
+            position: absolute;
+            top: 70px;
+            left: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 220px;
+                height: 220px;
+                border-radius: 50%;
+                transition: .6s;
+
+                &:hover {
+                    transform: scale(1.05);
+                    filter: brightness(88%);
+                }
+            }
+        }
+
+        .bg-img {
+            width: 100%;
+            height: 24vh;
+            object-fit: cover;
+            border-top-right-radius: 17px;
+            border-top-left-radius: 17px;
+            opacity: 80%;
+
+
+        }
+    }
+}
+.video{
+    width: 100%;
+    height: 70vh;
+    background-image: url('https://darion.wpbingosite.com/wp-content/uploads/2024/03/bg-1.jpg');
+    filter: brightness(90%);
+    margin-top: 90px;
+
+}
+
+.comments-black{
+
+    width: 100%;
+    height: 50vh;
+    background-color: #000;
+    color: #e2e2e2;
+    @include center();
+    .comment-text{
+        width: 560px;
+        p{
+            font-size: 25px;
+        }
+    }
+}
+
+.brands{
+    width: 100%;
+    height: 30vh;
+    margin: 40px 0px;
+    @include center();
+    
+        img{
+            width: 90%;
+            // width: 130px;
+            // height: 0px;
+            object-fit: cover;
+        }
+       
+    
+}
+@media (max-width:'992px') {
+    .text-photo {
+        .right-text {
+            margin-top: 40px;
+        }
+    }
+
+}
