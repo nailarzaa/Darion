@@ -26,8 +26,8 @@ const HomePage = () => {
 
 
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {data && <p style={{ color: "green" }}>Success: {JSON.stringify(data)}</p>}
+      {/* {error && <p style={{ color: "red" }}>{error}</p>}
+      {data && <p style={{ color: "green" }}>Success: {JSON.stringify(data)}</p>} */}
       <MySlider />   
       
       {/* Categories cards */}
@@ -97,7 +97,7 @@ const HomePage = () => {
                     </p>
                   </div>
                   <div className="wavy-border-button">
-                    <button>Shop Now <i className="fa-solid fa-arrow-right-long" /></button>
+                    <button>{t('shopnow')} <i className="fa-solid fa-arrow-right-long " /></button>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ const HomePage = () => {
                     </p>
                   </div>
                   <div className="wavy-border-button">
-                    <button>Shop Now <i className="fa-solid fa-arrow-right-long" /></button>
+                    <button>{t('shopnow')} <i className="fa-solid fa-arrow-right-long" /></button>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ const HomePage = () => {
                   <p>Wheter you want to brighten up a dim hallway or add a statement piece to the dining
                     room.</p>
                   <div className="wavy-border-button">
-                    <button>Shop Now <i className="fa-solid fa-arrow-right-long" /></button>
+                    <button>{t('shopnow')} <i className="fa-solid fa-arrow-right-long" /></button>
                   </div>
                 </div>
               </div>

@@ -2,8 +2,11 @@ import React from 'react'
 import '../assets/css/About.scss'
 import Subscribe from './Subscribe'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const About = () => {
+  const {t}= useTranslation();
+
 
   
   return (
@@ -12,8 +15,8 @@ const About = () => {
       <div className="about-photo">
         <img src="https://darion.wpbingosite.com/wp-content/uploads/2024/03/bg-breadcrumb.jpg" alt="" />
         <div className="about-text">
-          <p><Link to='/' style={{ color: 'black', textDecoration: 'none' }}>Home</Link>/ <span>About Us</span></p>
-          <h1>About Us</h1>
+          <p><Link to='/' style={{ color: 'black', textDecoration: 'none' }}>{t('home')}</Link>/ <span>{t('about')}</span></p>
+          <h1></h1>
         </div>
       </div>
 
@@ -24,10 +27,8 @@ const About = () => {
               <div className="left-photo"><img src="https://darion.wpbingosite.com/wp-content/uploads/2024/03/banner-31.jpg" alt="" /></div>
             </div>
             <div className="col-lg-6 col-md-12 col-sm-12 textt">
-              <div className="right-text"><h1 className='mb-4'>Comfort and Style: <br />The Art of Interior Decor</h1>
-                <p>Familiar furniture unexpectedly accumulates dust in the house.
-                  Choosing and using suitable furniture is of great significance
-                  in reducing the amount of dust accumulated…</p>
+              <div className="right-text"><h1 className='mb-4'>{t('comfortanddesign')}</h1>
+                <p>{t('abouttext')}</p>
               </div>
             </div>
           </div>

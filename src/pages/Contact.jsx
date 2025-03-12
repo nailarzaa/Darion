@@ -5,11 +5,14 @@ import Swal from 'sweetalert2';
 import emailjs from '@emailjs/browser'
 import Subscribe from './Subscribe';
 import Navbar from './Navbar';
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
+  const { t } = useTranslation()
   const formRef = useRef();
 
   const sendEmail = (e) => {
+
     e.preventDefault();
 
     emailjs
@@ -22,6 +25,7 @@ const Contact = () => {
             title: 'Success',
             icon: 'success'
           })
+          formRef.current.reset();
         },
         (error) => {
           Swal.fire({
@@ -37,8 +41,8 @@ const Contact = () => {
       <div className="contact-photo">
         <img src="https://darion.wpbingosite.com/wp-content/uploads/2024/03/bg-breadcrumb.jpg" alt="" />
         <div className="contact-text">
-          <p><Link to='/' style={{ color: 'black', textDecoration: 'none' }}>Home</Link>/ <span>Contact Us</span></p>
-          <h1>Contact Us</h1>
+          <p><Link to='/' style={{ color: 'black', textDecoration: 'none' }}>{t('home')}</Link>/ <span>{t('contact')}</span></p>
+          <h1>{t('contact')}</h1>
         </div>
       </div>
       <div className="gradient-part">
@@ -47,7 +51,7 @@ const Contact = () => {
             <div className="row">
               <div className="col-lg-6 col-md-12 col-sm-12">
                 <div className="text">
-                  <span>HOW TO FIND US</span>
+                  <span>{t('howtofindus')}</span>
                   <h1>HOURS & LOCATION</h1>
                   <p>72 Madison Avenue, New York, NY 10016</p>
                   <p>We are open for table service Everyday 11:00am – 9:00pm, as well as Saturday & Sunday 9:30am – 9:00pm. </p>
@@ -80,28 +84,28 @@ const Contact = () => {
       <Subscribe />
 
 
-   
-    <div className="general-contact-info">
-       <div className="contact-infos">
-     <div className="containe">
-        <h3>Contact Details</h3>
-        <h1>We've been waiting for you</h1>
-        <p>We want to hear from you. Let us know how we can help.</p>
-     <div className="contact-details">
-        <div className="inputs">
-          <h4>Send us a Message</h4>
-          <div className="name-input"><input type="text" placeholder='Enter your name' /></div>    
-          <div className="mail-input"><input type="text" placeholder='Enter your email' /></div>    
-          <div className="subject-input"><input type="text" placeholder='Enter your subject' /></div>    
-          <textarea style={{width:'100%'}} className="message-input"></textarea>   
-          <button onClick={sendEmail} className='submit'>Submit</button>
-          
-        </div>
 
+      <div className="general-contact-info">
+        <div className="contact-infos">
+          <form onSubmit={sendEmail} ref={formRef}>
+            <h3>Contact Details</h3>
+            <h1>We've been waiting for you</h1>
+            <p>We want to hear from you. Let us know how we can help.</p>
+            <div className="contact-details">
+              <div className="inputs">
+                <h4>Send us a Message</h4>
+                <div className="name-input"><input type="text" name='name' placeholder='Enter your name' /></div>
+                <div className="mail-input"><input type="text" name='email' placeholder='Enter your email' /></div>
+                <div className="subject-input"><input type="text" name='subject' placeholder='Enter your subject' /></div>
+                <div className="subject-input"><input type="text" name='message' placeholder='Your message...' /></div>
+                <button type='submit' className='submit'>Submit</button>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
       </div>
-     </div>
-     </div>
-    </div>
 
     </>
   )

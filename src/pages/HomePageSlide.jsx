@@ -19,7 +19,7 @@ export default function HomePageSlider() {
 
            <div className="comfort-d">
            <h1>{t('tailored')}</h1>
-                <button className='see-more'>See More</button>
+                <button className='see-more'>{t('button')}</button>
            </div>
             <Swiper
                 effect={'coverflow'}

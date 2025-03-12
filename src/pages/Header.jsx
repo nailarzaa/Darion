@@ -78,9 +78,9 @@ const Header = () => {
                   </li>
                 </ul>
                 <div className="navbar-right d-flex gap-2">
-                  <button className="btn">
+                  <Link to="/wishlist" className="btn">
                     <i className="fa-regular fa-heart"></i>
-                  </button>
+                  </Link>
                   <Link to='/basket' className="btn position-relative">
                     <i className="fa-solid fa-cart-shopping"></i>
                     <span  className="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-dark">

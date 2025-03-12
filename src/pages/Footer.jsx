@@ -31,17 +31,15 @@ const Footer = () => {
                 <h5 className="footer-text mb-4">{t('footer')}</h5>
                 <ul className="nav flex-column">
                   <li className="nav-item ">
-                    <Link to='/' className="nav-link p-0 text-body-secondary footer-text ">Products</Link>
+                    <Link to='/' className="nav-link p-0 text-body-secondary footer-text ">{t('shop')}</Link>
                   </li>
                   <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">About Us</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('aboutus')}</a>
                   </li>
                   <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Reservation</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('contactus')}</a>
                   </li>
-                  <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Contact</a>
-                  </li>
+               
                   <li className="nav-item">
                     <a href="#" className="nav-link p-0 text-body-secondary footer-text">FAQ</a>
                   </li>
@@ -50,22 +48,22 @@ const Footer = () => {
             </div>
             <div className="col-12 col-sm-4 col-lg-3">
               <div className="third">
-                <h5 className="footer-text mb-4">Learn More</h5>
+                <h5 className="footer-text mb-4">{t('learnmore')}</h5>
                 <ul className="nav flex-column">
+                  <Link to='/' className="nav-item ">
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('home')}</a>
+                  </Link>
                   <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Home</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('features')}</a>
                   </li>
                   <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Features</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('aboutus')}</a>
                   </li>
                   <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">About Us</a>
-                  </li>
-                  <li className="nav-item ">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Privacy Policy</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('privacy')}</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">Terms of Use</a>
+                    <a href="#" className="nav-link p-0 text-body-secondary footer-text">{t('termofuse')}</a>
                   </li>
                 </ul>
               </div>

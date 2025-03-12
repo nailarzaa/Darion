@@ -9,10 +9,13 @@ import { Pagination } from 'antd';
 import axios from 'axios';
 import { ProductContext } from '../context/ProductContext';
 import SingleCard from '../Components/SingleCard';
+import { useTranslation } from 'react-i18next';
 
 
 
 const Products = () => {
+      const {t}= useTranslation();
+  
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -28,8 +31,8 @@ const Products = () => {
 
       <div className="product-photo">
         <div className="product-text">
-          <p><Link to='/' style={{ color: 'palette ', textDecoration: 'none' }}>Home</Link>/ <span>Products</span></p>
-          <h1>Products </h1>
+          <p><Link to='/' style={{ color: 'palette ', textDecoration: 'none', color:'black' }}>{t('home')}</Link>/ <span>{t('shop')}</span></p>
+          <h1>{t('shop')} </h1>
         </div>
         {/* <MySlider /> */}
       </div>
@@ -41,7 +44,7 @@ const Products = () => {
             <div className="col-3">
               <div className="category-filter px-4">
                 <div className="category-items">
-                  <h4 className='mb-3'>Categories</h4>
+                  <h4 className='mb-3'>{t('ctg')}</h4>
                   <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('Cheesy') }} type="checkbox" name="bathroom" id="" /> <p  className='p-0 m-0 mx-2'>Cheesy</p></div>
                   <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('withOlives') }} type="checkbox" name="chair" id="" /> <p  className='p-0 m-0 mx-2'>Chair</p></div>
                   <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('Chicken') }} type="checkbox" name="decor" id="" /> <p  className='p-0 m-0 mx-2'>Decor</p></div>
@@ -54,14 +57,14 @@ const Products = () => {
 
                 <div className="price-filter">
                   <h4>
-                    Price
+                  {t('price')}
                   </h4>
                   <div className="filter-item"></div>
-                  <p>Range: <span>$20.00-$250.00</span></p>
+                  <p>{t('range')}: <span>$20.00-$250.00</span></p>
                 </div>
 
                 <div className="color-filter">
-                  <h4>Color</h4>
+                  <h4>{t('color')}</h4>
                   <div className="color-item">
                     <div className="row">
                       <div className="col-lg-2">
@@ -96,7 +99,7 @@ const Products = () => {
                 <hr />
 
                 <div className="brand-filter">
-                  <h4>Brands</h4>
+                  <h4>{t('brand')}</h4>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="brand-item">
@@ -133,7 +136,7 @@ const Products = () => {
 
                 <div className="feature-product">
                   <h4>
-                    Feature Product
+                  {t('featuredprdct')}
                   </h4>
                   <div className="feature-product-item d-flex m-2 col-md-12 col-sm-12">
                     <img style={{ width: '100px' }} src="https://darion.wpbingosite.com/wp-content/uploads/2020/12/pro-12.jpg" alt="" />

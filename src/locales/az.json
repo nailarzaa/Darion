@@ -23,10 +23,34 @@
   "Q2": "Sifaşimin gec çatdırılacağını gördükdə sifarişimi necə ləğv edə bilərəm?",
   "Q3": "Sifarişimin invoysunu necə əldə edə bilərəm?",
   "A1": "Sifariş verərkən çatdırılma günü göstərilir. Sifariş verildikdən sonra eyni çatdırılma vaxtı da sifarişin təsdiqində qeyd olunacaq. Buna görə də, heç vaxt mümkün deyil ki, sifariş zamanı, veb saytındakı göndərmə gününün sifarişin təsdiqindən fərqli olması.",
-  "bestseller":"Ən çox satanlar",
-  "experience":"Ən yaxşı məhsulları mağazamızdan təcrübə edin!",
-  "tailored":"Fərdi Rahatlıq: Fərdi Daxili Dizayn",
-  "footer":"Sürətli bağlantılar"
+  "bestseller": "Ən çox satanlar",
+  "experience": "Ən yaxşı məhsulları mağazamızdan təcrübə edin!",
+  "tailored": "Fərdi Rahatlıq: Fərdi Daxili Dizayn",
+  "footer": "Sürətli bağlantılar",
+  "shop": "Məhsullar",
+  "aboutus": "Haqqımızda",
+  "contactus": "Əlaqə",
+  "home": "Ana səhifə",
+  "termofuse": "İstifadə qaydası",
+  "privacy": "Məxfilik siyasəti",
+  "features": "Xüsusiyyətlər",
+  "learnmore":"Daha çox baxın",
+  "button":"Daha Çox Gör",
+  "shopnow":"İndi Al",
+  "price":"Qiymət",
+  "color":"Rəng",
+  "brand":"Brend",
+  "featuredprdct":"Xüsusi Məhsullar",
+  "range": "Qiymət Aralığı",
+  "comfortanddesign":"Rahatlıq və Dizayn: Interyer Dekor Sənəti",
+  "abouttext":"Tanış mebel gözlənilmədən evdə toz toplayır. Uyğun mebel seçmək və istifadə etmək yığılan tozun miqdarının azaldılmasında böyük əhəmiyyət kəsb edir...",
+  "signup":"Bildirişlər və Digər Promosyonlar Almaq üçün Bülletenimizə Qeydiyyatdan Keçin",
+  "subscribe":"Abunə Ol",
+  "email":"Poçt Hesabınızı Qeyd Edin...",
+  "howtofindus":"BİZİ NECƏ TAPA BİLƏRSİNİZ",
+  "hoursandloc":"SAATLAR & MƏKAN",
+  "address":"72 Madison Prospekti, Nyu York, NY 10016"
+
 
 
 
