@@ -11,6 +11,7 @@ import '../assets/css/HomePageSlider.scss'
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function HomePageSlider() {
     const {t}= useTranslation();
@@ -19,7 +20,7 @@ export default function HomePageSlider() {
 
            <div className="comfort-d">
            <h1>{t('tailored')}</h1>
-                <button className='see-more'>{t('button')}</button>
+                <Link to='/product'><button className='see-more'>{t('button')}</button></Link>
            </div>
             <Swiper
                 effect={'coverflow'}

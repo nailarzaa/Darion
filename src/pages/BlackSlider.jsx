@@ -29,6 +29,7 @@ export default function BlackSlider() {
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiperch"
+        style={{height:"50vh"}}
       >
         <SwiperSlide><div className="comments-black">
         <div className="comment-text">

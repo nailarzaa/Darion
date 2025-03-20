@@ -1,7 +1,7 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import '../assets/css/SignUp.scss';
 import Aos from 'aos';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import ApiContext from '../context/ApiContext';
@@ -12,6 +12,9 @@ const Login = () => {
   const passRef = useRef();
   const emailRef = useRef();
   const [endPoint, header] = useContext(ApiContext);
+  const navigate = useNavigate();
+  const [eye, setEye] = useState(true);
+  const [inputType, setInputType] = useState('password')
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -20,24 +23,42 @@ const Login = () => {
       email: emailRef.current.value,
       password: passRef.current.value,
     };
+    if (loginData.email === "admin@mail.com" && loginData.password === "admin123") {
+      localStorage.setItem('authToken', 'your_jwt_token');
+      Swal.fire('Success', "Admin login is succesfully!", 'success');
+      navigate('/dashboard/sliderdashboard');
+      return;
+    } else {
+      Swal.fire('Error', 'Invalid passsword or username', 'error')
+    }
 
-    console.log("Sending data:", loginData); 
+    console.log("Sending data:", loginData);
 
     axios
-      .post(`${endPoint}/login`, loginData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(`${endPoint}/login`, loginData, header)
       .then((res) => {
         console.log(res.data);
         setCookie("cookie-e", res.data);
+        navigate('/')
       })
       .catch((err) => {
         console.error(err);
         Swal.fire("Error", "Invalid email or password", "error");
       });
+
+
   };
+
+  const passToggleShow = () => {
+    if (eye === true) {
+      setEye(false);
+      setInputType("text");
+    } else {
+      setEye(true);
+      setInputType("password");
+    }
+  }
+
 
   return (
     <div className="signup-page" data-aos="fade-down">
@@ -53,8 +74,11 @@ const Login = () => {
                 </div>
                 <div className="pass-input">
                   <p>Password</p>
-                  <input ref={passRef} type="password" name="password" placeholder="Enter your password" />
-                </div>
+                  <div style={{width:'70%', border:'1px solid #e3e3e3', display:'flex', justifyContent:'space-between', borderRadius:"10px"}} className="pass-box">
+                    <input style={{width:"100%", border:"none" , outline:"none"}}  ref={passRef} type={inputType} name="password" placeholder="Enter your password" />
+                    <button  type='button' onClick={passToggleShow} className='btn btn-toggle-show'>{eye===true? <i class="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i> }</button>
+
+                  </div>                </div>
                 <button className="signup-button">Sign In</button>
 
                 <div className="or">

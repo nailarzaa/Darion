@@ -1,11 +1,24 @@
 :root {
-    --navbar-bg-color: white;
-    --navbar-text-color: #2E3034;
-    --btn-bg-color: #f8f9fa;
-  }
-  
-  [data-theme="dark"] {
-    --navbar-bg-color: #2E3034;
-    --navbar-text-color: white;
-    --btn-bg-color: #343a40;
-  }
+  --navbar-bg-color: white;
+  --navbar-text-color: #2E3034;
+  --btn-bg-color: #f8f9fa;
+  --img-bg-color: invert(0);
+  --dark-img: brightness(1);
+  --gradient-bg: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(227, 224, 212, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  --card-bg: white;
+
+}
+
+[data-theme="dark"] {
+  --navbar-bg-color: #2E3034;
+  --navbar-text-color: white;
+  --btn-bg-color: #343a40;
+  --img-bg-color: invert(.8);
+  --dark-img: brightness(0.6);
+  --gradient-bg: rgb(46,48,52);
+  --card-bg: rgb(46, 48, 52);
+
+
+
+
+}

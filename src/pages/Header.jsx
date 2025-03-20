@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from 'react-use-cart';
 import { ProductContext } from '../context/ProductContext';
+import { useWishlist } from 'react-use-wishlist';
+import Switch from '../Components/modeButton';
 
 const Header = () => {
   const { t, i18n } = useTranslation(); 
@@ -29,6 +31,8 @@ const Header = () => {
   }, []);
 
   const {totalItems}= useCart();
+  const {totalWishlistItems}= useWishlist()
+
   const [product]= useContext(ProductContext);
   const [keyword, setKeyword]= useState()
 
@@ -62,6 +66,9 @@ const Header = () => {
               <div className="offcanvas-body">
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                   <li className="nav-item mx-2">
+                    <Link to='/' className="nav-link active">{t('home')}</Link>
+                  </li>
+                  <li className="nav-item mx-2">
                     <Link to='/product' className="nav-link active">{t('products')}</Link>
                   </li>
                   <li className="nav-item mx-2">
@@ -78,8 +85,12 @@ const Header = () => {
                   </li>
                 </ul>
                 <div className="navbar-right d-flex gap-2">
-                  <Link to="/wishlist" className="btn">
+                  <Link to="/wishlist" className="btn position-relative">
                     <i className="fa-regular fa-heart"></i>
+                    <span  className="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-dark">
+                        { totalWishlistItems}
+
+                    </span>
                   </Link>
                   <Link to='/basket' className="btn position-relative">
                     <i className="fa-solid fa-cart-shopping"></i>
@@ -97,9 +108,11 @@ const Header = () => {
                   <button onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'az' : 'en')} className="btn">
                     {t('changeLang')}
                   </button>
-                  <button className="btn" onClick={toggleTheme}>
+
+                  <Switch/>
+                  {/* <button className="btn" onClick={toggleTheme}>
                     {theme === "light" ? "🌙" : "☀️"}
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

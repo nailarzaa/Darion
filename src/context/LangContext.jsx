@@ -4,7 +4,6 @@ import { languages } from "../data/data";
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  // Get language from localStorage or default to "en"
   const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
 
   useEffect(() => {

@@ -13,23 +13,37 @@ import { ApiContext } from '../context/ApiContext';
 const HomePage = () => {
     const { t, i18n } = useTranslation(); 
     const [product]= useContext(ProductContext);
+    const [endPoint,header]= useContext(ApiContext)
 
+    // 4 dene random card 
     const randomProducts=useMemo(()=>{
       return [...product].sort(()=>Math.random()-0.5).slice(0,4)
     },[product])
 
 
 
+// fetch api
+    const [threeImageData, setThreeImageData] = useState([]);
+    useEffect(() => {
+
+      const fetchImageData = async () => {
+          try {
+              const response = await axios.get(`${endPoint}/threeImage`);
+              setThreeImageData(response.data);
+          } catch (error) {
+              console.error("Error fetching slider data:", error);
+          }
+      };
+
+      fetchImageData();
+  }, []);
+
 
   return (
     <div>
-
-
-
       {/* {error && <p style={{ color: "red" }}>{error}</p>}
       {data && <p style={{ color: "green" }}>Success: {JSON.stringify(data)}</p>} */}
       <MySlider />   
-      
       {/* Categories cards */}
             <div data-aos="fade-up" className="black-categories">
               <div className="container-fluid p-4">
@@ -117,13 +131,12 @@ const HomePage = () => {
               </div>
             </div>
             <div className="col-lg-6">
-              <div className="box" id="lighting">
+              <div  className="box box-3" id="lighting">
                 <img src="https://darion.wpbingosite.com/wp-content/uploads/2024/02/banner-3.jpg" alt />
                 <div className="text">
                   <span>CEILING LIGHTING</span>
                   <h5>Andre Black Cone Pendant Light</h5>
-                  <p>Wheter you want to brighten up a dim hallway or add a statement piece to the dining
-                    room.</p>
+                  <p>Wheter you want to brighten up a dim hallway or add a statement.</p>
                   <div className="wavy-border-button">
                     <button>{t('shopnow')} <i className="fa-solid fa-arrow-right-long" /></button>
                   </div>
@@ -135,7 +148,7 @@ const HomePage = () => {
       </section>
       
       {/* =============Product cards============== */}
-    <div className="slider-cards mb-5">
+    <div className="slider-cards">
     <div className="products">
         <div className="container-fluid p-5">
           <h1>{t('bestseller')}</h1>
@@ -153,7 +166,7 @@ const HomePage = () => {
       <HomePageSlider/>
     </div>
 
-    {/* <BlackSlider/> */}
+    <BlackSlider/>
     </div>
   )
 }

@@ -23,16 +23,21 @@ import CategoryDashboard from './dashboard/CategoryDashboard';
 import HeroSectionDashboard from './dashboard/HeroSectionDashboard';
 import ProductDashboard from './dashboard/ProductDashboard';
 import SubCategoryDashboard from './dashboard/SubCategoryDashboard';
+import PrivateRoute from './utils/ProtectedRoutes';
+import PaymentForm from './pages/PaymentForm';
+import Checkout from './pages/Checkout';
 
 const Layout = ({ children }) => {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith("/dashboard");
+  const isCheckout = location.pathname.startsWith('/checkout')
 
   return (
     <>
-      {!isDashboard && <Header />}
-      {children}
-      {!isDashboard && <Footer />}
+      
+      {!isDashboard && !isCheckout && <Header />}
+    {children}
+    {!isDashboard && !isCheckout && <Footer />}
     </>
   );
 };
@@ -43,6 +48,8 @@ const App = () => {
       <Layout>
         <ScrollToTop />
         <Routes>
+
+
           <Route path="/dashboard" element={<CombineDashboard />}>
             <Route path="sliderdashboard" element={<SliderPage />} />
             <Route path="categorydashboard" element={<CategoryDashboard />} />
@@ -64,6 +71,9 @@ const App = () => {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+
         </Routes>
       </Layout>
     </BrowserRouter>

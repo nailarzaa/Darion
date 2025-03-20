@@ -1,3 +1,4 @@
+@import './Theme.scss';
 #app {
     height: 100%
 }
@@ -17,10 +18,11 @@ body {
     padding: 0;
 }
 
-.slider-cards{
-    background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(227,224,212,1) 50%, rgba(255,255,255,1) 100%);
+.slider-cards {
+    // background: rgb(255, 255, 255);
+    background: var(--gradient-bg);
 }
+
 .swiper {
     width: 100%;
     padding-top: 50px;
@@ -48,7 +50,11 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(227,224,212,1) 
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .see-more{
+    h1{
+        color: var(--navbar-text-color);
+    }
+
+    .see-more {
         margin-top: 20px;
         padding: 9px 40px;
         background-color: black;
@@ -60,6 +66,6 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(227,224,212,1) 
     }
 }
 
-.swiper-pagination-bullet-active{
-background-color: #000;
+.swiper-pagination-bullet-active {
+    background-color: #000;
 }

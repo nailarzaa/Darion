@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../assets/css/SignUp.scss';
 import Aos from 'aos';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ApiContext from '../context/ApiContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -18,6 +18,7 @@ const Register = () => {
     const passRef = useRef();
     const confirmPassRef = useRef();
     const [endPoint, header] = useContext(ApiContext);
+    const navigate = useNavigate()
 
     const formSubmit = (e) => {
         e.preventDefault();
@@ -31,15 +32,11 @@ const Register = () => {
             setLoading(false);
         } else {
             if (passRef.current.value === confirmPassRef.current.value) {
-                axios.post(`${endPoint}/register`, {
+                axios.post("http://localhost:3007/api/register", {
                     userName: nameRef.current.value,
                     email: mailRef.current.value,
                     password: passRef.current.value
-                }, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
+                }, header)
                     .then((res) => {
                         setLoading(false);
                         if (res.status === 200 || res.status === 201) {
@@ -47,6 +44,7 @@ const Register = () => {
                                 title: "You are registered successfully!",
                                 icon: 'success'
                             });
+                            navigate('/login')
                         } else {
                             Swal.fire({
                                 title: "Something went wrong!",

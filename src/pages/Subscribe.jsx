@@ -7,10 +7,10 @@ const Subscribe = () => {
   return (
     <>
     <div className="subscribe">
-        <h4 style={{width:"500px"}}>{t('signup')}</h4>
+        <h4 style={{width:"100%"}}>{t('signup')}</h4>
         <div className="input-button">
             <input placeholder={t('email')} type="text" name="" id="" />
-            <button>{t('subscribe')}</button>
+            <button style={{fontSize:"14px"}}>{t('subscribe')}</button>
         </div>
     </div>
     </>

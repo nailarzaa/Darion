@@ -1,0 +1,152 @@
+.form-submit {
+    margin-top: 12px;
+
+    input {
+        width: 100%;
+        height: 45px;
+        padding-left: 10px;
+        border-radius: 10px;
+        border: 1px solid #e3e3e3;
+        // outline: red;
+        outline-color: #7F2649;
+        margin: 6px 0;
+    }
+
+    .card-ui {
+        margin-top: 20px;
+    }
+
+    input {
+        width: 100%;
+        height: 40px;
+        margin: 4px 0;
+        border-radius: 10px;
+        border: 1px solid #e3e3e3;
+        outline: none;
+    }
+
+    button {
+        padding: 8px 30px;
+        border: none;
+        margin-top: 10px;
+        background-color: black;
+        color: #e3e3e3;
+        border-radius: 7px;
+    }
+}
+
+#PaymentForm {
+    align-items: center;
+    width: 64%;
+    height: 70vh;
+}
+
+.checkout-nav {
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+
+.left-checkout {
+
+    // buttons design
+    .express-checkout {
+        p {
+            text-align: center;
+        }
+
+        .checkout-button {
+            margin-left: 55px;
+            display: flex;
+            gap: 10px;
+
+            button {
+                width: 44%;
+                height: 44px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .shoppay {
+
+
+                background-color: #390CED;
+
+                img {
+                    width: 200px;
+                    height: 44px;
+                    object-fit: cover;
+                }
+            }
+
+            .paypal {
+                background-color: #f2ba36;
+
+                img {
+                    width: 110px;
+                    height: 44px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .or-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+
+            p {
+                margin: 0;
+            }
+
+            .left-line,
+            .right-line {
+                height: 40px;
+                width: 260px;
+                height: .8px;
+                background-color: #212121;
+
+            }
+        }
+    }
+
+    .checkout-contact {
+        input {
+            width: 100%;
+            height: 45px;
+            padding-left: 10px;
+            border-radius: 10px;
+            border: 1px solid #e3e3e3;
+            // outline: red;
+            outline-color: #7F2649;
+        }
+    }
+
+    // inputs design
+    .checkout-delivery {
+        input {
+            width: 100%;
+            height: 45px;
+            padding-left: 10px;
+            border-radius: 10px;
+            border: 1px solid #e3e3e3;
+            // outline: red;
+            outline-color: #7F2649;
+            margin: 6px 0;
+        }
+    }
+}
+
+.right-checkout {
+    // position: fixed;
+    width: 100%;
+    height: auto;
+    // background-color: #FDF6F0;
+
+}
+

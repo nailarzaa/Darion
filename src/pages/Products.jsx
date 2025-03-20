@@ -29,7 +29,7 @@ const Products = () => {
   return (
     <>
 
-      <div className="product-photo">
+      <div className="product-photo pt-5">
         <div className="product-text">
           <p><Link to='/' style={{ color: 'palette ', textDecoration: 'none', color:'black' }}>{t('home')}</Link>/ <span>{t('shop')}</span></p>
           <h1>{t('shop')} </h1>
@@ -38,7 +38,7 @@ const Products = () => {
       </div>
 
 
-      <div className="products-categories mt-4">
+      <div className="products-categories pt-4">
         <div className="container-fluid">
           <div className="row">
             <div className="col-3">
@@ -63,7 +63,7 @@ const Products = () => {
                   <p>{t('range')}: <span>$20.00-$250.00</span></p>
                 </div>
 
-                <div className="color-filter">
+                {/* <div className="color-filter">
                   <h4>{t('color')}</h4>
                   <div className="color-item">
                     <div className="row">
@@ -71,7 +71,7 @@ const Products = () => {
                         <div className="palette"></div>
                       </div>
                       <div className="col-lg-2">
-                        <div className="palette"></div>
+                        <div className="palette" ></div>
                       </div>
                       <div className="col-lg-2">
                         <div className="palette"></div>
@@ -95,7 +95,7 @@ const Products = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <hr />
 
                 <div className="brand-filter">
@@ -172,7 +172,7 @@ const Products = () => {
               </div>
             </div>
             <div className="col-9 p-0 ">
-              <Space wrap>
+              {/* <Space wrap>
                 <Select
                   defaultValue="Default sorting"
                   className='mx-5'
@@ -198,7 +198,7 @@ const Products = () => {
                   ]}
                 />
 
-              </Space>
+              </Space> */}
 
               <div className="product-cards m-5">
                 <div className="row">

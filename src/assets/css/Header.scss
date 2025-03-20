@@ -90,15 +90,19 @@
 .swiper-backface-hidden {
     padding: 0 !important;
     height: 80vh;
-    .swiper-button-next{
+
+    .swiper-button-next {
         color: #5e5c5c;
     }
-    .swiper-button-prev{
+
+    .swiper-button-prev {
         color: #5e5c5c;
     }
 }
+
 .mySwiper {
-    
+    box-shadow: var(--);
+
     .slide {
         position: relative;
 
@@ -144,7 +148,7 @@
     img {
         width: 100%;
         // height: 84.4vh;
-        height:80vh !important;
+        height: 80vh !important;
         object-fit: cover;
     }
 }
@@ -187,11 +191,13 @@
     }
 }
 
+// 3 DENE CARD MEHSULLAR
 .threebox {
     padding: 50px;
     background-color: var(--navbar-bg-color);
 
     .box {
+
         width: 100%;
         height: 300px;
         border-radius: 20px;
@@ -199,6 +205,8 @@
         margin-bottom: 20px;
         overflow: hidden;
         transition: all 1s ease;
+        filter: brightness(--dark-img) !important;
+
 
         &:hover {
             img {
@@ -292,132 +300,279 @@
     }
 }
 
+@media (max-width:"605px") {
+    .threebox {
+        .box {
+            .text {
+                p {
+                    font-size: 14px;
+                }
+
+                h5 {
+                    font-size: 20px;
+                    margin-top: 13px;
+                }
+
+                span {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:"480px") {
+    .threebox {
+        .box {
+            .box-3 {
+                height: 290px !important;
+            }
+
+            .text {
+                p {
+                    font-size: 13px;
+                    margin-top: -13px;
+
+                }
+
+                h5 {
+                    font-size: 18px;
+                    margin-top: 10px;
+                }
+
+                span {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:"440px") {
+    .threebox {
+        .box-3 {
+            height: 280px !important;
+        }
+
+        .box {
+            .text {
+                p {
+                    font-size: 12px;
+                }
+
+                h5 {
+                    font-size: 15px;
+                    margin-top: 13px;
+                }
+
+                span {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:"396px") {
+    .threebox {
+        .box {
+            .box-3 {
+                height: 200px !important;
+            }
+
+            .text {
+                width: 150px;
+
+                p {
+                    font-size: 12px;
+                }
+
+                h5 {
+                    font-size: 13px;
+                    margin-top: 7px;
+                }
+
+                span {
+                    font-size: 10px;
+                }
+            }
+
+            .wavy-border-button {
+                button {
+                    padding: 8px 9px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:"340px") {
+    .threebox {
+        .box {
+
+            .wavy-border-button {
+                button {
+                    padding: 8px 10px;
+                    font-size: 13px;
+                }
+
+            }
+
+            .text {
+                width: 140px;
+
+                p {
+                    font-size: 12px;
+                }
+
+                h5 {
+                    font-size: 13px;
+                    margin-top: 13px;
+
+                }
+
+                span {
+                    font-size: 7px;
+                }
+            }
+        }
+    }
+}
+
 // CARD DESIGN STARTS HERE
 .products {
 
+    h1,
+    p {
+        color: var(--navbar-text-color);
+    }
+
+    .product {}
 
     .product-price {
         font-size: 18px;
         font-weight: 500;
-        color: rgb(24, 23, 23);
-      
+        color: var(--navbar-text-color);
+
         @media (max-width: 768px) {
-          font-size: 16px; // Smaller font size for mobile
+            font-size: 16px; // Smaller font size for mobile
         }
-      }
-      
-      .product-title {
+    }
+
+    .product-title {
+        color: var(--navbar-text-color);
         margin: 0;
         margin-top: 15px !important;
-      
+
         @media (max-width: 768px) {
-          font-size: 14px; // Smaller font size for mobile
+            font-size: 14px; // Smaller font size for mobile
         }
-      }
-      
-      p {
+    }
+
+    p {
         margin-bottom: 40px;
-      }
-      
-      .product {
+    }
+
+    .product {
         width: 100%;
         position: relative;
-      
+
         &:hover {
-          .three-button {
-            opacity: 1;
-            transform: translateY(-10px);
-          }
-      
-          .add-to-cart {
-            opacity: 1;
-            transform: translateY(-13px);
-          }
+            .three-button {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+
+            .add-to-cart {
+                opacity: 1;
+                transform: translateY(-13px);
+            }
         }
-      
+
         .add-to-cart {
-          position: absolute;
-          bottom: 0;
-          width: 90%;
-          display: flex;
-          border-radius: 14px;
-          justify-content: center;
-          height: 50px;
-          align-items: center;
-          background-color: #000;
-          color: #fff;
-          left: 5%; // Adjusted for better centering
-          opacity: 0;
-          transition: 0.4s;
-      
-          @media (max-width: 768px) {
-            height: 40px; // Smaller button height for mobile
-            font-size: 14px; // Smaller font size for mobile
-          }
-        }
-      
-        .sale-button {
-          position: absolute;
-          top: 10px; // Adjusted for smaller screens
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          padding: 0px 10px; // Reduced padding for smaller screens
-      
-          .hot,
-          .sale {
-            border: none;
-            border-radius: 20px;
-            font-size: 12px;
-            padding: 4px 10px; // Adjusted padding for smaller screens
-          }
-      
-          .hot {
+            position: absolute;
+            bottom: 0;
+            width: 90%;
+            display: flex;
+            border-radius: 14px;
+            justify-content: center;
+            height: 50px;
+            align-items: center;
             background-color: #000;
             color: #fff;
-          }
-      
-          .sale {
-            background-color: #d81717;
-            color: #fff;
-          }
+            left: 5%; // Adjusted for better centering
+            opacity: 0;
+            transition: 0.4s;
+
+            @media (max-width: 768px) {
+                height: 40px; // Smaller button height for mobile
+                font-size: 14px; // Smaller font size for mobile
+            }
         }
-      
+
+        .sale-button {
+            position: absolute;
+            top: 10px; // Adjusted for smaller screens
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0px 10px; // Reduced padding for smaller screens
+
+            .hot,
+            .sale {
+                border: none;
+                border-radius: 20px;
+                font-size: 12px;
+                padding: 4px 10px; // Adjusted padding for smaller screens
+            }
+
+       
+
+            .sale {
+                background-color: #d81717;
+                color: #fff;
+            }
+        }
+
         .three-button {
-          position: absolute;
-          top: 50%; // Adjusted for better positioning
-          right: 10px;
-          gap: 10px;
-          display: flex;
-          flex-direction: column;
-          opacity: 0;
-          transition: 0.5s;
-      
-          button,
-          .readmore {
-            color: #000;
-            width: 40px !important; // Smaller buttons for mobile
-            height: 40px !important; // Smaller buttons for mobile
-            font-size: 18px; // Smaller icons for mobile
-            border-radius: 50%;
-            border: none;
-            background-color: #fff !important;
-            box-shadow: 0px 0px 5px rgb(205, 203, 203);
-          }
+            position: absolute;
+            top: 50%; // Adjusted for better positioning
+            right: 10px;
+            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transition: 0.5s;
+
+            button,
+            .readmore {
+                color: #000;
+                width: 40px !important; // Smaller buttons for mobile
+                height: 40px !important; // Smaller buttons for mobile
+                font-size: 18px; // Smaller icons for mobile
+                border-radius: 50%;
+                border: none;
+                background-color: #fff !important;
+                box-shadow: 0px 0px 5px rgb(205, 203, 203);
+            }
         }
-      
+
         img {
-          border-radius: 16px;
-          width: 100%;
-          height: auto; // Ensure the image scales properly
+            border-radius: 16px;
+            width: 100%;
+            height: auto; // Ensure the image scales properly
         }
-      }
+    }
 }
 
 // CARD DESIGN ENDS HERE
 
 
 .navbar {
+    img {
+        filter: var(--img-bg-color);
+    }
+
     position: relative;
     width: 100%;
     display: flex;
@@ -443,14 +598,22 @@
 }
 
 .navbar-nav .nav-link.active {
-    color: var(--navbar-text-color);
+    color: var(--navbar-text-color) !important;
 }
 
 .navbar-toggler-icon {
-    background-color: var(--navbar-bg-color);
+    background-color: var(--navbar-bg-color) !important;
 
     .navbar-toggler-icon {
         color: var(--navbar-text-color) !important;
+    }
+}
+
+.navbar-right {
+
+    i,
+    button {
+        color: var(--navbar-text-color);
     }
 }
 
@@ -481,5 +644,5 @@
 .navbar-brand img {
     transform: none !important;
     rotate: 0deg !important;
-  }
-  
+}
+

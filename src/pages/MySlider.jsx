@@ -18,7 +18,6 @@ const MySlider = () => {
     useEffect(() => {
         Aos.init({ duration: 1000, once: true });
 
-        // ✅ API-dən slider məlumatlarını çəkmək
         const fetchSliderData = async () => {
             try {
                 const response = await axios.get(`${endPoint}/slider`);
