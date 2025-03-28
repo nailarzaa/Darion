@@ -8,7 +8,6 @@ export const ProductProvider =({children})=>{
         axios.get('https://mocki.io/v1/f74792dd-04d6-4987-80f0-3aed6f2eaa93')
         .then(res=>{
             setProduct(res.data.products)
-            console.log(res.data.products);
             
         })
     },[])

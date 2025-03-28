@@ -8,7 +8,9 @@ import {
 } from '../tools/services/categoryApi';
 
 const CategoryDashboard = () => {
-  const { data: categories, isLoading } = useGetCategoriesQuery();
+  const { data, isLoading, refetch } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
+
   const [addCategory] = useAddCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
@@ -16,27 +18,38 @@ const CategoryDashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentCategory, setCurrentCategory] = useState({
-    name: { en: '', az: '' },
+    name: '',
     image: '',
     slug: '',
   });
 
   const handleAddOrUpdateCategory = async (e) => {
     e.preventDefault();
-    if (editMode) {
-      await updateCategory({ id: currentCategory._id, ...currentCategory }).unwrap();
-    } else {
-      await addCategory(currentCategory).unwrap();
+    try {
+      if (editMode) {
+        await updateCategory({ id: currentCategory._id, ...currentCategory }).unwrap();
+      } else {
+        await addCategory(currentCategory).unwrap();
+      }
+      setShowModal(false);
+      setCurrentCategory({ name: '', image: '', slug: '' });
+      refetch();
+    } catch (error) {
+      console.error('Failed to save category:', error);
     }
-    setShowModal(false);
-    setCurrentCategory({ name: { en: '', az: '' }, image: '', slug: '' });
   };
 
   const handleDeleteCategory = async (id) => {
-    await deleteCategory(id).unwrap();
+    try {
+      await deleteCategory(id).unwrap();
+      refetch();
+    } catch (error) {
+      console.error('Failed to delete category:', error);
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
+  console.log(data)
 
   return (
     <div>
@@ -46,19 +59,17 @@ const CategoryDashboard = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name (English)</th>
-            <th>Name (Azerbaijani)</th>
+            <th>Name</th>
             <th>Image</th>
             <th>Slug</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {categories?.map((category) => (
+          {categories.map((category) => (
             <tr key={category._id}>
-              <td>{category.name.en}</td>
-              <td>{category.name.az}</td>
-              <td>{category.image}</td>
+              <td>{category.name}</td>
+              <td><img width={60} src={category.image} alt="" /></td>
               <td>{category.slug}</td>
               <td>
                 <Button
@@ -87,28 +98,14 @@ const CategoryDashboard = () => {
         <Modal.Body>
           <Form onSubmit={handleAddOrUpdateCategory}>
             <Form.Group>
-              <Form.Label>English Name</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
-                value={currentCategory.name.en}
+                value={currentCategory.name}
                 onChange={(e) =>
                   setCurrentCategory({
                     ...currentCategory,
-                    name: { ...currentCategory.name, en: e.target.value },
-                  })
-                }
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Azerbaijani Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={currentCategory.name.az}
-                onChange={(e) =>
-                  setCurrentCategory({
-                    ...currentCategory,
-                    name: { ...currentCategory.name, az: e.target.value },
+                    name: e.target.value,
                   })
                 }
                 required

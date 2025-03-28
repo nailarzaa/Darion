@@ -28,7 +28,7 @@ export default class PaymentForm extends React.Component {
 
   render() {
     return (
-      <div id="PaymentForm">
+      <div style={{height:"auto"}} id="PaymentForm">
         {/* Credit Card UI */}
         <Cards className='card-ui'
           cvc={this.state.cvc}
@@ -84,7 +84,6 @@ export default class PaymentForm extends React.Component {
           />
 
           {/* Submit Button */}
-          <button type="submit">Pay Now</button>
         </form>
       </div>
     );

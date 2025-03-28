@@ -26,18 +26,28 @@ import SubCategoryDashboard from './dashboard/SubCategoryDashboard';
 import PrivateRoute from './utils/ProtectedRoutes';
 import PaymentForm from './pages/PaymentForm';
 import Checkout from './pages/Checkout';
+import AdminRoute from './ProtectedRoute';
+import BlogDetail from './pages/BlogDetail';
+import { useGetProductsQuery } from './tools/services/productApi';
+import Loader from './Components/Preloader';
+import RecommendProduct from './pages/RecommendProduct';
 
 const Layout = ({ children }) => {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith("/dashboard");
   const isCheckout = location.pathname.startsWith('/checkout')
 
+  const{ data:products, isLoading}= useGetProductsQuery();
+  if(isLoading){
+    return <Loader/>
+  }
+
   return (
     <>
-      
+
       {!isDashboard && !isCheckout && <Header />}
-    {children}
-    {!isDashboard && !isCheckout && <Footer />}
+      {children}
+      {!isDashboard && !isCheckout && <Footer />}
     </>
   );
 };
@@ -49,6 +59,8 @@ const App = () => {
         <ScrollToTop />
         <Routes>
 
+          {/* Dashboard part starts */}
+          <Route element={<AdminRoute/>}>
 
           <Route path="/dashboard" element={<CombineDashboard />}>
             <Route path="sliderdashboard" element={<SliderPage />} />
@@ -57,13 +69,17 @@ const App = () => {
             <Route path="productdashboard" element={<ProductDashboard />} />
             <Route path="subcategory" element={<SubCategoryDashboard />} />
           </Route>
+          </Route>
+          {/* Dashboard part ends */}
 
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blogs />} />
+          <Route path='/blog/:urlid' element={<BlogDetail/>}/>
           <Route path="/product" element={<Products />} />
-          <Route path="/product/:urlid" element={<ProductDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path='recommend' element={<RecommendProduct/>}/>
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

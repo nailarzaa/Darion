@@ -1,230 +1,183 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import '../assets/css/Products.scss'
-import Slider from 'react-slick';
-import MySlider from './Slick';
-import { Select, Space } from 'antd';
-import { Rate } from 'antd';
-import { Pagination } from 'antd';
-import axios from 'axios';
-import { ProductContext } from '../context/ProductContext';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../assets/css/Products.scss';
+import { Slider, Rate, Pagination } from 'antd';
 import SingleCard from '../Components/SingleCard';
 import { useTranslation } from 'react-i18next';
-
-
+import { useGetProductsQuery } from '../tools/services/productApi';
+import { useGetCategoriesQuery } from '../tools/services/categoryApi';
 
 const Products = () => {
-      const {t}= useTranslation();
-  
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const { t } = useTranslation();
+  const { data: products, isLoading } = useGetProductsQuery();
+  const { data } = useGetCategoriesQuery();
+  const categories = data?.categories || [];
 
-  const [product] = useContext(ProductContext);
   const [filtered, setFiltered] = useState([]);
-  const selectCategory = (cat) => {
-    const filteredProduct = product.filter(p => p.categories === cat);
-    setFiltered(filteredProduct)
-  }
+  const [priceRange, setPriceRange] = useState([25, 250]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showAll, setShowAll] = useState(false);
+  const productsPerPage = 3;
+
+
+  // const handleCategoryChange = (categoryId) => {
+  //   setSelectedCategories((prev) =>
+  //     prev.includes(categoryId)
+  //       ? prev.filter((id) => id !== categoryId)
+  //       : [...prev, categoryId]
+  //   );
+  // };
+
+  // Filter and paginate products
+  useEffect(() => {
+    if (products) {
+      let filteredProducts = products;
+
+      // Filter by price range
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
+      );
+
+      // Filter by  categories guya ama islemir
+      if (selectedCategories.length > 0) {
+        filteredProducts = filteredProducts.filter((product) =>
+          product.categoryId && selectedCategories.includes(product.categoryId.toString())
+        );
+      }
+
+      // Filter by search 
+      if (searchTerm) {
+        filteredProducts = filteredProducts.filter((product) =>
+          product.title?.en?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.title?.az?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+
+      // Pagination Logic
+      if (!showAll) {
+        const indexOfLastProduct = currentPage * productsPerPage;
+        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+        filteredProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+      }
+
+      setFiltered(filteredProducts);
+    }
+  }, [priceRange, selectedCategories, searchTerm, products, currentPage, showAll]);
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <>
-
-      <div className="product-photo pt-5">
-        <div className="product-text">
-          <p><Link to='/' style={{ color: 'palette ', textDecoration: 'none', color:'black' }}>{t('home')}</Link>/ <span>{t('shop')}</span></p>
-          <h1>{t('shop')} </h1>
+      <div className="about-photo">
+        <img style={{ width: "100%", objectFit: 'cover', height: "40vh" }} src="https://darion.wpbingosite.com/wp-content/uploads/2024/03/bg-breadcrumb.jpg" alt="" />
+        <div style={{ width: "90%" }} className="about-text">
+          <p className='text-center'><Link to='/' style={{ color: 'black', textDecoration: 'none' }}>{t('home')}</Link>/ <span>Products</span></p>
+          <h1 className='text-center'>Products</h1>
         </div>
-        {/* <MySlider /> */}
       </div>
-
 
       <div className="products-categories pt-4">
         <div className="container-fluid">
           <div className="row">
+            {/* Sidebar */}
             <div className="col-3">
               <div className="category-filter px-4">
                 <div className="category-items">
-                  <h4 className='mb-3'>{t('ctg')}</h4>
-                  <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('Cheesy') }} type="checkbox" name="bathroom" id="" /> <p  className='p-0 m-0 mx-2'>Cheesy</p></div>
-                  <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('withOlives') }} type="checkbox" name="chair" id="" /> <p  className='p-0 m-0 mx-2'>Chair</p></div>
-                  <div className="item d-flex m-0 p-0 "><input onClick={() => { selectCategory('Chicken') }} type="checkbox" name="decor" id="" /> <p  className='p-0 m-0 mx-2'>Decor</p></div>
-
-
-
+                  <h4 className="mb-3">{t('ctg')}</h4>
+                  {categories?.map((item) => (
+                    <div className="item d-flex m-0 p-0" key={item._id}>
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(item._id.toString())}
+                        onChange={() => handleCategoryChange(item._id.toString())}
+                      />
+                      <p className="p-0 m-0 mx-2">{item.name}</p>
+                    </div>
+                  ))}
                 </div>
-
                 <hr />
-
                 <div className="price-filter">
-                  <h4>
-                  {t('price')}
-                  </h4>
-                  <div className="filter-item"></div>
-                  <p>{t('range')}: <span>$20.00-$250.00</span></p>
+                  <h4>{t('price')}</h4>
+                  <Slider
+                    range
+                    min={25}
+                    max={250}
+                    defaultValue={[25, 250]}
+                    value={priceRange}
+                    onChange={(value) => setPriceRange(value)}
+                  />
+                  <p>
+                    {t('range')}: <span>${priceRange[0]} - ${priceRange[1]}</span>
+                  </p>
                 </div>
-
-                {/* <div className="color-filter">
-                  <h4>{t('color')}</h4>
-                  <div className="color-item">
-                    <div className="row">
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-                      <div className="col-lg-2">
-                        <div className="palette" ></div>
-                      </div>
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-                      <div className="col-lg-2">
-                        <div className="palette"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-                <hr />
-
-                <div className="brand-filter">
-                  <h4>{t('brand')}</h4>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="brand-item">
-                        <p>Asoka</p>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6">
-                      <div className="brand-item">
-                        <p>Interior Premium</p>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6">
-                      <div className="brand-item">
-                        <p>Lavish Cuisine</p>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6">
-                      <div className="brand-item">
-                        <p>Medd</p>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6">
-                      <div className="brand-item">
-                        <p>Vetter</p>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div className="feature-product">
-                  <h4>
-                  {t('featuredprdct')}
-                  </h4>
-                  <div className="feature-product-item d-flex m-2 col-md-12 col-sm-12">
-                    <img style={{ width: '100px' }} src="https://darion.wpbingosite.com/wp-content/uploads/2020/12/pro-12.jpg" alt="" />
-                    <div className="feature-product-item-detail mx-2">
-                      <Rate className='rate-stars' allowHalf defaultValue={2.5} />
-                      <p className='feature-product-title'>Suspension Archives</p>
-                      <span className='feature-product-price'>$90.00</span>
-                    </div>
-                  </div>
-
-                  <div className="feature-product-item d-flex m-2 col-md-12 col-sm-12">
-                    <img style={{ width: '100px' }} src="https://darion.wpbingosite.com/wp-content/uploads/2020/12/pro-12.jpg" alt="" />
-                    <div className="feature-product-item-detail mx-2">
-                      <Rate className='rate-stars' allowHalf defaultValue={3} />
-
-                      <p className='feature-product-title'>Suspension Archives</p>
-                      <span className='feature-product-price'>$90.00</span>
-                    </div>
-                  </div>
-
-                  <div className="feature-product-item d-flex m-2">
-                    <img style={{ width: '100px' }} src="https://darion.wpbingosite.com/wp-content/uploads/2020/12/pro-12.jpg" alt="" />
-                    <div className="feature-product-item-detail mx-2">
-                      <Rate className='rate-stars' allowHalf defaultValue={5} />
-
-                      <p className='feature-product-title'>Suspension Archives</p>
-                      <span className='feature-product-price'>$90.00</span>
-                    </div>
-                  </div>
-                </div>
-
-
               </div>
             </div>
-            <div className="col-9 p-0 ">
-              {/* <Space wrap>
-                <Select
-                  defaultValue="Default sorting"
-                  className='mx-5'
-                  style={{
-                    width: 100,
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    
-                    {
-                      value: 'rating',
-                      label: 'Sort By Rating',
-                    },
-                   
-                    {
-                      value: 'lowprice',
-                      label: 'Sort By Price: Low To High',
-                    },
-                    {
-                      value: 'highprice',
-                      label: 'Sort By Price: High To Low',
-                    },
-                  ]}
-                />
 
-              </Space> */}
-
+            {/* Main Content */}
+            <div className="col-9 p-0">
               <div className="product-cards m-5">
-                <div className="row">
-                  {filtered.length === 0 ? product.map(item => (
-                    <SingleCard userdata={item} key={item.id} />
-                  )) : filtered.map(item => (
-                    <SingleCard userdata={item} key={item.id} />
-                  ))}
-
-
-
-
-
-
+                {/* Search Input */}
+                <div style={{
+                  width: "250px",
+                  border: "1px solid #e3e3e3",
+                  padding: "6px 5px",
+                  borderRadius: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "20px"
+                }}>
+                  <input
+                    style={{ width: "90%", border: 'none', outline: 'none' }}
+                    type="text"
+                    placeholder={t('search')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
+
+                {/* Product Cards */}
+                <div className="row">
+                  {filtered.length > 0 ? (
+                    filtered.map((item) => (
+                      <SingleCard userdata={item} key={item._id} />
+                    ))
+                  ) : (
+                    <p>{t('no_products_found')}</p>
+                  )}
+                </div>
+
+                {/* Pagination & Show All Button */}
+                <div className="d-flex justify-content-center mt-4">
+                  {!showAll ? (
+                    <Pagination
+                      current={currentPage}
+                      total={products?.length || 0}
+                      pageSize={productsPerPage}
+                      onChange={(page) => setCurrentPage(page)}
+                    />
+                  ) : null}
+                </div>
+
+                <div className="d-flex justify-content-center mt-3">
+                  <button
+                    className="btn btn-dark"
+                    onClick={() => setShowAll(!showAll)}
+                  >
+                    {showAll ? t('show paginated') : t('show all')}
+                  </button>
+                </div>
+
               </div>
-
-
-              <Pagination defaultCurrent={1} total={50} className='d-flex justify-content-center mb-4' />
             </div>
           </div>
         </div>
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

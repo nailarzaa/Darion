@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import '../assets/css/SignUp.scss';
 import Aos from 'aos';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,51 +14,45 @@ const Login = () => {
   const [endPoint, header] = useContext(ApiContext);
   const navigate = useNavigate();
   const [eye, setEye] = useState(true);
-  const [inputType, setInputType] = useState('password')
+  const [inputType, setInputType] = useState('password');
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
 
     const loginData = {
       email: emailRef.current.value,
       password: passRef.current.value,
     };
-    if (loginData.email === "admin@mail.com" && loginData.password === "admin123") {
-      localStorage.setItem('authToken', 'your_jwt_token');
-      Swal.fire('Success', "Admin login is succesfully!", 'success');
-      navigate('/dashboard/sliderdashboard');
-      return;
-    } else {
-      Swal.fire('Error', 'Invalid passsword or username', 'error')
+
+    try {
+      if (loginData.email === "admin@mail.com" && loginData.password === "admin123") {
+        // Admin Login
+        localStorage.setItem("authToken", "your_jwt_token");
+        localStorage.setItem("userRole", "admin");
+        localStorage.setItem("username", "Admin");
+        Swal.fire("Success", "Admin login successful!", "success");
+        navigate("/dashboard/sliderdashboard");
+      } else {
+        // Regular User Login
+        const res = await axios.post(`${endPoint}/login`, loginData, header);
+        setCookie("cookie-e", res.data.token);
+        localStorage.setItem("authToken", res.data.token);
+        localStorage.setItem("userRole", res.data.role);
+        localStorage.setItem("username", res.data.username); // Assuming API returns username
+
+        Swal.fire("Success", "Login successful, welcome!", "success");
+        navigate("/");
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Invalid email or password", "error");
     }
-
-    console.log("Sending data:", loginData);
-
-    axios
-      .post(`${endPoint}/login`, loginData, header)
-      .then((res) => {
-        console.log(res.data);
-        setCookie("cookie-e", res.data);
-        navigate('/')
-      })
-      .catch((err) => {
-        console.error(err);
-        Swal.fire("Error", "Invalid email or password", "error");
-      });
-
-
   };
 
   const passToggleShow = () => {
-    if (eye === true) {
-      setEye(false);
-      setInputType("text");
-    } else {
-      setEye(true);
-      setInputType("password");
-    }
-  }
-
+    setEye(!eye);
+    setInputType(eye ? "text" : "password");
+  };
 
   return (
     <div className="signup-page" data-aos="fade-down">
@@ -70,15 +64,17 @@ const Login = () => {
                 <h3>Welcome Back</h3>
                 <div className="mail-input">
                   <p>Email</p>
-                  <input ref={emailRef} type="email" name="email" placeholder="Enter your email" />
+                  <input ref={emailRef} type="email" name="email" placeholder="Enter your email" required />
                 </div>
                 <div className="pass-input">
                   <p>Password</p>
-                  <div style={{width:'70%', border:'1px solid #e3e3e3', display:'flex', justifyContent:'space-between', borderRadius:"10px"}} className="pass-box">
-                    <input style={{width:"100%", border:"none" , outline:"none"}}  ref={passRef} type={inputType} name="password" placeholder="Enter your password" />
-                    <button  type='button' onClick={passToggleShow} className='btn btn-toggle-show'>{eye===true? <i class="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i> }</button>
-
-                  </div>                </div>
+                  <div className="pass-box">
+                    <input ref={passRef} type={inputType} name="password" placeholder="Enter your password" required />
+                    <button type="button" onClick={passToggleShow} className="btn btn-toggle-show">
+                      {eye ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
+                    </button>
+                  </div>
+                </div>
                 <button className="signup-button">Sign In</button>
 
                 <div className="or">
